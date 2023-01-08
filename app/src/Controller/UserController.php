@@ -19,11 +19,9 @@ class UserController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/signup', name: 'signup', methods: ['POST'])]
+    #[Route('/signup', name: 'user_signup', methods: ['POST'])]
     public function createUser(Request $request, Serializer  $serializer, ValidatorInterface $validator,
-    UserService $userService
-
-    ): JsonResponse
+    UserService $userService): JsonResponse
     {
         $dto = $serializer->deserialize($request->getContent(), RegisterUserInput::class, 'json');
         $errors = $validator->validate($dto);
@@ -39,6 +37,21 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
+    #[Route('/login', name: 'user_login', methods: ['POST'])]
+    public function index(Request $request,UserService $userService): JsonResponse
+    {
+        $params = json_decode($request->getContent(), true);
+        $user = $userService->login($params);
+
+        if ($user) {
+            return $this->json(['message' => 'user loggedIn successfully!']);
+        }
+
+        return $this->json(['message' => 'in valid credential!']);
+    }
 
 
 

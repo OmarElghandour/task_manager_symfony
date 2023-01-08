@@ -32,4 +32,25 @@ class UserService
 
     }
 
+
+    /**
+     * @throws Exception
+     */
+    public function login($userInput): bool
+    {
+        $user = $this->repository->findOneBy(['email' => $userInput['email']]);
+        if ($user) {
+            if ($user->getPassword() === $userInput['password']) {
+               return true;
+            } else {
+                throw new Exception('Password is incorrect');
+            }
+        } else {
+            echo 'User not found';
+        }
+
+        return false;
+    }
+
+
 }

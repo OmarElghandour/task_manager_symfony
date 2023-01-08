@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
@@ -20,10 +21,12 @@ class Task
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Type("\DateTimeInterface")]
+    #[ORM\Column(type: "\DateTimeInterface")]
     private ?\DateTimeInterface $startAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Type("\DateTimeInterface")]
+    #[ORM\Column(type: "\DateTimeInterface")]
     private ?\DateTimeInterface $endAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
@@ -50,12 +53,12 @@ class Task
         return $this;
     }
 
-    public function getdescription(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setdescription(?string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
