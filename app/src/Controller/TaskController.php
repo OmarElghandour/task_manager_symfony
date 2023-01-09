@@ -16,13 +16,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class TaskController extends AbstractController
+class TaskController extends BaseController
 {
     #[Route('/task', name: 'app_task', methods: ['GET'])]
-    
-    /**
-     *
-     */
     public function index(): JsonResponse
     {
         $test = 'some text';
@@ -33,20 +29,15 @@ class TaskController extends AbstractController
     }
 
     #[Route('/task', name: 'app_create_task', methods: ['POST'])]
-    public function create(Request $request, ValidatorInterface $validator, SerializerInterface $serializer, UserRepository $repository): JsonResponse
+    public function create(Request $request, UserRepository $repository): JsonResponse
     {
         $params = json_decode($request->getContent(), true);
-
         $user = $repository->findOneBy(['id' => $params['userId']]);
-        $dto = $serializer->deserialize($request->getContent(), Task::class, 'json');
-        $errors = $validator->validate($dto);
-        if (count($errors) > 0) {
-            throw new BadRequestHttpException((string) $errors);
-        }
-
+        $this->validateParams( $request, Task::class);
         $params['userId'] = $user;
         $task = TaskFactory::create($params);
-
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
         return $this->json([
             'message' => $task->getTitle(),
             'path' => 'src/Controller/TaskController.php',

@@ -7,7 +7,6 @@
 /public/bundles/
 /var/
 /vendor/
-/mysql/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -21,3 +20,4 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+/mysql/

@@ -16,7 +16,7 @@ class TaskFactory
         $task->setStartAt(new \DateTime($options['startAt']));
         $task->setEndAt(new \DateTime($options['endAt']));
         $task->setUserId($options['userId']);
-        $task->setCategoryId($options['categoryId']);
+        $task->setCategoryId($options['categoryId'] ?? null);
         return $task;
     }
 }

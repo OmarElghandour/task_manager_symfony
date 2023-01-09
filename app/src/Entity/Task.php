@@ -22,17 +22,18 @@ class Task
     private ?string $description = null;
 
     #[Assert\Type("\DateTimeInterface")]
-    #[ORM\Column(type: "\DateTimeInterface")]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startAt = null;
 
     #[Assert\Type("\DateTimeInterface")]
-    #[ORM\Column(type: "\DateTimeInterface")]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user_id = null;
 
+    #[ORM\Column(nullable: true)]
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     private ?Category $category_id = null;
 
