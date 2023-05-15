@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 networks:
   sql_php:
     driver: bridge
@@ -7,17 +7,13 @@ services:
     container_name: db
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: symfony_docker
-      MYSQL_USER: symfony
-      MYSQL_PASSWORD: symfony
+        MYSQL_ROOT_PASSWORD: RK@Y14S19R5u
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
-    networks:
-      - sql_php
+        - db_data:/var/lib/mysql
   php:
     container_name: php-container
     build:
@@ -30,7 +26,6 @@ services:
       - db
     networks:
       - sql_php
-
   nginx:
     container_name: nginx
     image: nginx:stable-alpine
@@ -44,19 +39,15 @@ services:
       - db
     networks:
       - sql_php
-
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: pma
-    links:
-      - db
+    restart: always
     environment:
       PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
+      MYSQL_ROOT_PASSWORD: RK@Y14S19R5u
     ports:
       - '8090:80'
-    networks:
-      - sql_php
-
+    depends_on:
+      - db
+volumes:
+  db_data:
