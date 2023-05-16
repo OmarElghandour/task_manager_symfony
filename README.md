@@ -1,81 +1,91 @@
-Task Manager Project
-This is a Task Manager project built using Symfony PHP framework, Docker, and PostgreSQL. The project allows users to manage their tasks by creating, updating, and deleting them.
+<h2>Prerequisites</h2>
 
-Prerequisites
-Make sure you have the following installed on your machine:
+<p>Make sure you have the following installed on your machine:</p>
 
-Docker
-Docker Compose
-Getting Started
-To get started with the Task Manager project, follow the instructions below:
+<ul>
+    <li>Docker</li>
+    <li>Docker Compose</li>
+</ul>
 
-Clone the repository to your local machine:
+<h2>Getting Started</h2>
 
-bash
-Copy code
-git clone <repository_url>
-Navigate to the project directory:
+<p>To get started with the Task Manager project, follow the instructions below:</p>
 
-bash
-Copy code
-cd task-manager-project
-Build the Docker containers:
+<ol>
+    <li>Clone the repository to your local machine:</li>
+</ol>
 
-Copy code
-docker-compose build
-Start the Docker containers:
+<pre><code>git clone &lt;repository_url&gt;</code></pre>
 
-Copy code
-docker-compose up -d
-Install dependencies:
+<ol start="2">
+    <li>Navigate to the project directory:</li>
+</ol>
 
-bash
-Copy code
-docker-compose exec app composer install
-Generate the Symfony secret key:
+<pre><code>cd task-manager-project</code></pre>
 
-bash
-Copy code
-docker-compose exec app php bin/console secrets:set
-You will be prompted to provide a value for the secret key. You can generate one using the following command:
+<ol start="3">
+    <li>Build the Docker containers:</li>
+</ol>
 
-bash
-Copy code
-docker-compose exec app php bin/console secret:generate
-Create the database:
+<pre><code>docker-compose build</code></pre>
 
-bash
-Copy code
-docker-compose exec app php bin/console doctrine:database:create
-Run the database migrations:
+<ol start="4">
+    <li>Start the Docker containers:</li>
+</ol>
 
-bash
-Copy code
-docker-compose exec app php bin/console doctrine:migrations:migrate
-Access the application in your browser:
+<pre><code>docker-compose up -d</code></pre>
 
-arduino
-Copy code
-http://localhost:8000
-Usage
-Once the Task Manager project is set up and running, you can perform the following actions:
+<ol start="5">
+    <li>Install dependencies:</li>
+</ol>
 
-Create a task: Click on the "Add Task" button and fill in the required details.
-Update a task: Click on the "Edit" button next to a task and modify the details.
-Delete a task: Click on the "Delete" button next to a task to remove it from the list.
-Configuration
-The project uses environment variables for configuration. These variables are defined in the .env file located in the project root directory. You can modify these variables according to your requirements.
+<pre><code>docker-compose exec app composer install</code></pre>
 
-Below are the important configuration variables:
+<ol start="6">
+    <li>Generate the Symfony secret key:</li>
+</ol>
 
-DATABASE_URL: Specifies the connection URL for the PostgreSQL database.
-APP_SECRET: Specifies the secret key used by Symfony for various security-related purposes.
-Contributing
-Contributions to the Task Manager project are welcome. If you find any issues or want to add new features, feel free to submit a pull request.
+<pre><code>docker-compose exec app php bin/console secrets:set</code></pre>
 
-License
-The Task Manager project is open-source and released under the MIT License. Feel free to use, modify, and distribute it as per the terms of the license.
+<p>You will be prompted to provide a value for the secret key. You can generate one using the following command:</p>
 
+<pre><code>docker-compose exec app php bin/console secret:generate</code></pre>
 
+<ol start="7">
+    <li>Create the database:</li>
+</ol>
 
+<pre><code>docker-compose exec app php bin/console doctrine:database:create</code></pre>
 
+<ol start="8">
+    <li>Run the database migrations:</li>
+</ol>
+
+<pre><code>docker-compose exec app php bin/console doctrine:migrations:migrate</code></pre>
+
+<ol start="9">
+    <li>Access the application in your browser:</li>
+</ol>
+
+<p><a href="http://localhost:8000">http://localhost:8000</a></p>
+
+<h2>Usage</h2>
+
+<p>Once the Task Manager project is set up and running, you can perform the following actions:</p>
+
+<ul>
+    <li><strong>Create a task:</strong> Click on the "Add Task" button and fill in the required details.</li>
+    <li><strong>Update a task:</strong> Click on the "Edit" button next to a task and modify the details.</li>
+    <li><strong>Delete a task:</strong> Click on the "Delete" button next to a task to remove it from the list.</li>
+</ul>
+
+<h2>Configuration</h2>
+
+<p>The project uses environment variables for configuration. These variables are defined in the <code>.env</code> file located in the project root directory. You can modify these variables according to your requirements.</p>
+
+<p>Below are the important configuration variables:</p>
+
+<ul>
+    <li><code>DATABASE_URL:</code> Specifies the connection URL for the PostgreSQL database.</li>
+    <li><code>APP
+</ul>
